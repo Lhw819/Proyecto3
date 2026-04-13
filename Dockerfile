@@ -3,10 +3,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN chmod +x gradlew
-RUN ./gradlew bootJar
-
-COPY build/libs/app.jar app.jar
+RUN chmod +x ./gradlew
+RUN ./gradlew build -x test
 
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+
+CMD ["sh", "-c", "java -jar build/libs/*.jar"]
